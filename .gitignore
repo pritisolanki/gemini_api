@@ -1,0 +1,11 @@
+node_modules/
+build/
+images/
+Dockerfile
+test.js
+.DS_Store
+.Dockerfile
+.dockerignore
+.gcloudignore
+keyfile.json
+enc.js
