@@ -27,15 +27,6 @@ const generativeVisionModel = vertexAI.getGenerativeModel({
   system_instruction: "You are a ego vehicle. See the images from third person perspective."
 });
 
-// Sample data (replace with your data source)
-function fileToGenerativePart(path, mimeType) {
-    return {
-      inlineData: {
-        data: Buffer.from(fs.readFileSync(path)).toString("base64"),
-        mimeType
-      },
-    };
-}
 
 // Route to get all messages (POST request)
 app.post('/api/gem', async (req, res) => {
