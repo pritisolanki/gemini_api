@@ -1,5 +1,4 @@
 const express = require('express');
-const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
 const  bodyParser = require('body-parser');
 const app = express();
@@ -25,6 +24,7 @@ const generativeVisionModel = vertexAI.getGenerativeModel({
     },
   ],
   generation_config: {max_output_tokens: 10, temperature: 0.1},
+  system_instruction: "You are a ego vehicle. See the images from third person perspective."
 });
 
 // Sample data (replace with your data source)
@@ -37,27 +37,12 @@ function fileToGenerativePart(path, mimeType) {
     };
 }
 
-function guessMimeTypeFromBase64(base64Data) {  
-    // Analyze initial bytes of base64 data
-    const decodedBytes = (base64Data).slice(0, 4);
-    const signature = decodedBytes.toString('ascii');
-    if (signature.startsWith('/9j/')) {
-      return 'image/jpeg';
-    } else if (signature.startsWith('iVBORw0KGgo')) {
-      return 'image/png';
-    } else if (signature.startsWith('R0lGODlh')) {
-      return 'image/gif';
-    } else {
-      return 'application/octet-stream';  // Generic binary data
-    }
-}
-
-// Route to get all messages (GET request)
+// Route to get all messages (POST request)
 app.post('/api/gem', async (req, res) => {
   const base64Image = req.body.image;
   try
   {
-    const prompt = `Analyze image for traffic light and vehicle in my way within 10 meters. If light color is green respond GO only. If light color is red respond STOP only. If light color is yellow respond Go SLOW only. If no traffic light is visible then respond GO only. Irrespective of traffic signals if anything obstructing my view in my way respond STOP only. No explanation needed.`;
+    const prompt = `Analyze image for traffic light and vehicle in my way within 45 meters. If light color is green respond GO only. If light color is red respond STOP only. If no traffic light is visible then respond GO only. Irrespective of traffic signals if anything obstructing my view in my way respond STOP only. No explanation needed.`;
 
     const filePart = {inlineData: {data: base64Image, mimeType: 'image/jpeg'}};
     const textPart = {text: prompt};
