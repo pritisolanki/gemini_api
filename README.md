@@ -11,4 +11,6 @@ Node js app for setting up REST api endpoint for gemini AI.
 - Run `npm install`
 - Run `npm start`
 
-Make sure to provide the image base64 in the request body.
+## Notes
+- Configure your google credentials
+- Make sure to provide the image base64 in the request body. 
