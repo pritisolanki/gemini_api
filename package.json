@@ -3,7 +3,7 @@
     "@google-cloud/vertexai": "^1.1.0",
     "@google/generative-ai": "^0.5.0",
     "axios": "^1.6.8",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "fs": "^0.0.1-security",
     "google-auth-library": "^9.8.0"
   },
